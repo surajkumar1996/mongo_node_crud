@@ -151,5 +151,17 @@ if(found){
 
 });
 
+router.delete("/api/:id",(req,res)=>{
+    var found=student.some((v,i)=>v.id===parseInt(req.params.id));
+
+    if(found){
+        res.json({msg:'student Deleted',
+    student:student.filter((v)=>v.id!==parseInt(req.params.id))
+    });
+    }else{
+        res.status(400).json({message:`message is not found with given ${req.params.id}`});
+    }
+})
+
 
 module.exports=router;
