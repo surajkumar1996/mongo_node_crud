@@ -3,8 +3,25 @@
         <title>This is template string need to get fast</title>
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <body>
-        <h3>hello world</h3>
+    <link rel="canonical" href="./amp.html">
+    <style>
+
+        /* * {
+            background-color: red;
+        } */
+    </style>
+    <body id="bdy">
+<select name="" id="city"></select>
+        <select id="service"></select>
+        <select id="frmCity">
+
+        </select>
+        <h1 class="me">me</h1>
+        <h3 id="head"> hello world</h3>
+
+        <input id="txt" type="text">
+
+        <button id="btn">btton</button>
 
         <div id="app">
 
@@ -25,6 +42,51 @@
             
         </div>
 
+        <select id="sel" onchange="sel(this)">
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+            <option value="green">green</option>
+        </select>
+
+        <select id="selec" onchange="my(this)">
+            <option value="first">first</option>
+            <option value="second">second</option>
+            <option value="other">other</option>
+        </select>
+
+        <button id="bt">butoon to show</button>
+
+        <div  id="div">show</div>
+
+<select id="opt">
+  
+
+</select>
+<select name="" id="may" onchange="mee(this)"></select>
+
+<select name="" id="llc"></select>
+        <script>
+// function chng(x){
+    var slct=document.getElementById("selec")
+    var bt=document.getElementById("bt");
+    var div=document.getElementById("div");
+    bt.addEventListener("click",function(e){
+        event.preventDefault();
+
+
+        if(slct.value == "other"){
+        console.log("Sruaj");
+        // div.show();
+
+    }
+
+    })
+    
+// }
+
+
+        </script>
+
         <script src="./templateString.js">
         </script>
         <script>
@@ -36,10 +98,128 @@ $(function(){
         $('#hd').attr("title","www.w3school.com");
 
     })
+    var valueSelect=$("#selec");
+    // console.log(valueSelect.val());
+    $("#bt").click(function(){
+        // alert("Ss")
+        if(valueSelect.val()==="other"){
+         $("#div").show();
+            return false;
+        }
+        else{
+            return true
+        }
+    })
+  
+
+
 
 })
 
         </script>
+        <script>
+            var div=document.getElementById("div");
+
+              function my(x){
+        if(x.value=="other"){
+            div.style.display = "none";
+         console.log("Sruauu")
+        //  div.modal("show")
+        }
+    }
+
+    var a=[2,3,4,1,5]; var b=[]; for(d in a){ for(c in d) if(a[d]<d[c]){ b+=a[d]; a[d]=d[c]; d[c]=b;} } console.log(a)
+
+var op=["suraj","mishra","kumar"];
+// var v=$("#opt").html();
+// document.getElementById("citySelected").innerHTML=`
+// ${city.map((v)=>`<option>${v} </option>`).join("")}
+// `;
+document.getElementById("opt").innerHTML=`
+ ${op.map((v)=>`<option>${v} </option>`).join("")}
+`;
+    
+
+var mySel=["green","blue","red"];
+document.getElementById("may").innerHTML=`
+${mySel.map((v)=>`<option>${v} </option>`).join("")}
+`;
+ 
+function mee(x){
+console.log(x.value);
+    document.getElementById("bdy").style.backgroundColor=x.value;
+}
+   
+
+
+aa([1,2,3],[3,5]); 
+
+function aa(){
+ var res=[];
+  for(let i=0;i<arguments.length;i++){ 
+      arguments[i].forEach((v)=>res.push(v));   
+
+        // for(let j=0;j<=arguments[i];j++){
+        //      res+=arguments[i][j]; 
+        //     }
+        } 
+         
+         console.log(res)
+        
+        }
+
+    
+        var ll=["krishna","content"];
+        document.getElementById("llc").innerHTML=`
+        ${ll.map((v)=>`<option>${v}</option>`)}
+        `;
+        </script>
+<script>
+ 
+    var city=["Bangalore","Hyderabad","Chennai","Mumbai","Delhi","Warangal","Tumkur"]
+    
+    var op="";
+    for(d in city){
+        op+='<option>'+city[d]+'</option>'
+    }
+    // document.getElementById("frmCity").innerHTML=op;
+    $("#frmCity").html(op);
+      
+    //  document.getElementById("frmCity").innerHTML=`
+    // ${city.map((v)=>`<option>${v} </option>`).join("")}
+    // `;
+
+    $.ajax({
+        method:'GET',
+        url:"https://services.medfin.in/catalog/v2/city-service-list",
+        type:"application/json"
+    }).then(function(response){
+        var citySelect="";
+        for(cit in response.cityList){
+            citySelect+='<option>'+response.cityList[cit]+'</option>';
+        }
+        $("#city").html(citySelect);
+
+        var serviceSelect="";
+        for(ser in response.data){
+            // <option value={{serviceid}}>{{servicename}}</option>
+            serviceSelect+=`<option value=${response.data[ser].serviceId}>${response.data[ser].serviceName}</option>`
+            // serviceSelect+='<option value=>'+response.data[ser].serviceName+'</option>'
+        }
+        $("#service").html(serviceSelect);
+      
+
+    })
+    
+    var service=["ACL Reconsctruction","AV Fistula","Chemoembolization","Diabetology","Fissure","Fistula","Gallbladder stone surgery","Gynaecology","Hernia","Hydrocele","Joint Injuries","Kidney Stones","MRI","Neurologist","Orthopaedics","PCL Reconsctruction","Percutaneous Drainage","Piles","Piles, Fistula, Fissure","Platelet Rich Plasma","Prostatic Artery Embolization","Spinal Surgeries","Sports Injuries","Thyroid Artery Embolization","Total Knee Replacement","Urology","Uterine Fibroid Embolization","Varicocele","Varicose Veins","Deep Vein Thrombosis","Bariatric Surgery","Foraminal Stenosis","Slip disc or Herniated disc","Transforaminal Interbody Lumbar Fusion (TILF)"];
+  
+  var serviceSelect="";
+ for(ser in service){
+    serviceSelect+='<option>'+service[ser]+'</option>'
+}
+$("#service").html(serviceSelect);
+
+    </script>
 
     </body>
 </html>

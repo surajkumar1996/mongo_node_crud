@@ -4,8 +4,32 @@ const uuid=require('uuid');
 const student=require('../Student');
 const db=require('../db');
 const collection ="todo";
+var app=express();
+var Client=require("node-rest-client").Client;
+var client=new Client();
+var service={}
+service.api={
+    my:function(req,callback){
+        var args={
+            headers:{
+                "content-type":"application/json"
+            }
+        }
+        return client.get("https://services.medfin.in/catalog/services/seo-page?url="+req.main+"/"+req.sub,args,callback)
+    }
+}
 
 
+router.get("/hitapi/:main/:sub",(req,res)=>{
+    service.api.my({
+        main:req.params.main,
+        sub:req.params.sub
+    },function(data){
+        res.render("myapi",{
+            data:data
+        })
+    })
+})
 
 router.get("/db",function(req,res,next){
     db.getDB().collection(collection).find({}).toArray((err,documents)=>{
@@ -154,7 +178,7 @@ if(found){
 router.delete("/api/:id",(req,res)=>{
     var found=student.some((v,i)=>v.id===parseInt(req.params.id));
 
-    if(found){
+    if(found){  
         res.json({msg:'student Deleted',
     student:student.filter((v)=>v.id!==parseInt(req.params.id))
     });
@@ -163,5 +187,10 @@ router.delete("/api/:id",(req,res)=>{
     }
 })
 
+
+router.get("/surajji",(req,res)=>{
+    var id=req.query.id;
+    res.send("hello"+id);
+})
 
 module.exports=router;
