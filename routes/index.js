@@ -109,6 +109,9 @@ var people={
 }
 
 //routing for render page
+router.get("/",(req,res)=>{
+    res.send("Welocome to my site");
+})
 
 router.get("/suraj/:id",(req,res)=>{
     res.render("index",{
